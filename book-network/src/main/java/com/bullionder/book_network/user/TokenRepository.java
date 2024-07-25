@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {
 
-    Optional<Token> fingByToken(String token);
+    Optional<Token> findByToken(String token);
 }

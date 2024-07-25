@@ -1,0 +1,11 @@
+POST {{api_url}}:{{api_port}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstname": "Hubert",
+  "lastname": "Matlak",
+  "email": "hubertmatlak14@gmail.com",
+  "password": "qwerty123"
+}
+
+###
