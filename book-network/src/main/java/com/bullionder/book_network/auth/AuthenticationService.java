@@ -1,11 +1,15 @@
 package com.bullionder.book_network.auth;
 
+import com.bullionder.book_network.email.EmailService;
+import com.bullionder.book_network.email.EmailTemplateName;
 import com.bullionder.book_network.role.RoleRepository;
 import com.bullionder.book_network.user.Token;
 import com.bullionder.book_network.user.TokenRepository;
 import com.bullionder.book_network.user.User;
 import com.bullionder.book_network.user.UserRepository;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +25,11 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
+    @Value("${application.mailing.frontend.activation-url}")
+    private String activationUrl;
 
-    public void register(RegistrationRequest request) {
+    public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
                 // TODO - better exception handling
                 .orElseThrow(() -> new IllegalArgumentException("ROLE USER was not initialized"));
@@ -41,9 +48,16 @@ public class AuthenticationService {
 
     }
 
-    private void sendValidationEmail(User user) {
+    private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
-        // send email
+        emailService.sendEmail(
+                user.getEmail(),
+                user.fullName(),
+                EmailTemplateName.ACTIVATE_ACCOUNT,
+                activationUrl,
+                newToken,
+                "Account activation"
+        );
     }
 
     private String generateAndSaveActivationToken(User user) {
