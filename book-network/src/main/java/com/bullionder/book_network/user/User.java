@@ -30,9 +30,9 @@ public class User implements UserDetails, Principal {
     @GeneratedValue
     private Integer id;
 
-    private String firstName;
+    private String firstname;
 
-    private String lastName;
+    private String lastname;
 
     private LocalDate dateOfBirth;
 
@@ -100,6 +100,6 @@ public class User implements UserDetails, Principal {
     }
 
     private String fullName() {
-        return firstName + " " + lastName;
+        return firstname + " " + lastname;
     }
 }
