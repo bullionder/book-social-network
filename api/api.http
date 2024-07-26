@@ -1,3 +1,4 @@
+###
 POST {{api_url}}:{{api_port}}/api/v1/auth/register
 Content-Type: application/json
 
@@ -9,3 +10,14 @@ Content-Type: application/json
 }
 
 ###
+POST {{api_url}}:{{api_port}}/api/v1/auth/authenticate
+Content-Type: application/json
+
+{
+  "email": "hubertmatlak14@gmail.com",
+  "password": "qwerty123"
+}
+
+###
+GET {{api_url}}:{{api_port}}/api/v1/auth/activate-account?token=315806
+Content-Type: application/x-www-form-urlencoded
