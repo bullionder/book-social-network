@@ -35,6 +35,10 @@ public class JwtService {
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
+    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
+        return buildToken(claims, userDetails, jwtExpiration);
+    }
+
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
@@ -59,10 +63,6 @@ public class JwtService {
                 .build()
                 .parseClaimsJwt(token)
                 .getBody();
-    }
-
-    private String generateToken(HashMap<String, Object> claims, UserDetails userDetails) {
-        return buildToken(claims, userDetails, jwtExpiration);
     }
 
     private String buildToken(Map<String, Object> claims, UserDetails userDetails, long jwtExpiration) {
