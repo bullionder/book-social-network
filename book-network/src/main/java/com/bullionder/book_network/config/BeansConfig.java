@@ -26,6 +26,11 @@ public class BeansConfig {
     }
 
     @Bean
+    public ApplicationAuditAware auditorAware() {
+        return new ApplicationAuditAware();
+    }
+
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
