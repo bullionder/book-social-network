@@ -1,5 +1,6 @@
 package com.bullionder.book_network.book;
 
+import com.bullionder.book_network.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +30,18 @@ public class BookMapper {
                 // .cover(book.getBookCover())
                 .isbn(book.getIsbn())
                 .authorName(book.getAuthorName())
+                .build();
+    }
+
+    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory history) {
+        return BorrowedBookResponse.builder()
+                .id(history.getBook().getId())
+                .title(history.getBook().getTitle())
+                .rate(history.getBook().getRate())
+                .isbn(history.getBook().getIsbn())
+                .returned(history.isReturned())
+                .returnApproved(history.isReturnApproved())
+                .authorName(history.getBook().getAuthorName())
                 .build();
     }
 }
