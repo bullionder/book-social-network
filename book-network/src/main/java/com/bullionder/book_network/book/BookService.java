@@ -1,5 +1,6 @@
 package com.bullionder.book_network.book;
 
+import com.bullionder.book_network.book.file.FileStorageService;
 import com.bullionder.book_network.common.PageResponse;
 import com.bullionder.book_network.exception.OperationNotPermittedException;
 import com.bullionder.book_network.history.BookTransactionHistory;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class BookService {
     private final BookMapper bookMapper;
     private final BookTransactionHistoryRepository transactionHistoryRepository;
     private final BookTransactionHistoryRepository bookTransactionHistoryRepository;
+    private final FileStorageService fileStorageService;
 
     public Integer save(BookRequest request, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
@@ -169,5 +172,52 @@ public class BookService {
                 .returnApproved(false)
                 .build();
         return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
+    }
+
+    public Integer returnBorrowedBook(Authentication connectedUser, Integer bookId) {
+        Book book = repository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with the ID:: " + bookId));
+        if (!book.isShareable() || book.isArchived()) {
+            throw new OperationNotPermittedException("The requested book cannot be borrowed since it is archived or not shareable");
+        }
+
+        User user = (User) connectedUser.getPrincipal();
+        if (!book.getOwner().getId().equals(user.getId())) {
+            throw new OperationNotPermittedException("You cannot borrow and return your own book");
+        }
+
+        BookTransactionHistory bookTransactionHistory = transactionHistoryRepository.findByBookIdAndUserId(bookId, user.getId())
+                .orElseThrow(() -> new OperationNotPermittedException("You did not borrow this book"));
+        bookTransactionHistory.setReturned(true);
+
+        return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
+    }
+
+    public Integer approveReturnBorrowedBook(Authentication connectedUser, Integer bookId) {
+        Book book = repository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with the ID:: " + bookId));
+        if (!book.isShareable() || book.isArchived()) {
+            throw new OperationNotPermittedException("The requested book cannot be borrowed since it is archived or not shareable");
+        }
+
+        User user = (User) connectedUser.getPrincipal();
+        if (!book.getOwner().getId().equals(user.getId())) {
+            throw new OperationNotPermittedException("You cannot borrow and return your own book");
+        }
+
+        BookTransactionHistory bookTransactionHistory = transactionHistoryRepository.findByBookIdAndOwnerId(bookId, user.getId())
+                .orElseThrow(() -> new OperationNotPermittedException("The book is not returned yet. You cannot approve its return"));
+        bookTransactionHistory.setReturnApproved(true);
+
+        return bookTransactionHistoryRepository.save(bookTransactionHistory).getId();
+    }
+
+    public void uploadBookCoverPicture(MultipartFile file, Authentication connectedUser, Integer bookId) {
+        Book book = repository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with the ID:: " + bookId));
+        User user = (User) connectedUser.getPrincipal();
+        var bookCover = fileStorageService.saveFile(file, user.getId());
+        book.setBookCover(bookCover);
+        repository.save(book);
     }
 }
