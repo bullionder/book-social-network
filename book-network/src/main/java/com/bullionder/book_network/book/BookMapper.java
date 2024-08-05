@@ -1,5 +1,6 @@
 package com.bullionder.book_network.book;
 
+import com.bullionder.book_network.book.file.FileUtils;
 import com.bullionder.book_network.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,7 @@ public class BookMapper {
                 .shareable(book.isShareable())
                 .rate(book.getRate())
                 .owner(book.getOwner().fullName())
-                // TODO implement this later
-                // .cover(book.getBookCover())
+                .cover(FileUtils.readFileFromLocation(book.getBookCover()))
                 .isbn(book.getIsbn())
                 .authorName(book.getAuthorName())
                 .build();
