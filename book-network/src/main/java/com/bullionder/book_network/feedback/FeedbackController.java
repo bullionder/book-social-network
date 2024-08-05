@@ -1,5 +1,6 @@
 package com.bullionder.book_network.feedback;
 
+import com.bullionder.book_network.common.PageResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
