@@ -19,5 +19,5 @@ Content-Type: application/json
 }
 
 ###
-GET {{api_url}}:{{api_port}}/api/v1/auth/activate-account?token=315806
+GET {{api_url}}:{{api_port}}/api/v1/auth/activate-account?token=246736
 Content-Type: application/x-www-form-urlencoded

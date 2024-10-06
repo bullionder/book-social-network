@@ -52,7 +52,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -85,7 +85,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageResponseBookResponse"
                 }
@@ -113,7 +113,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -163,7 +163,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "object"
                 }
@@ -194,7 +194,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -226,7 +226,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -258,7 +258,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -289,7 +289,7 @@
           "202": {
             "description": "Accepted",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "object"
                 }
@@ -319,7 +319,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AuthenticationResponse"
                 }
@@ -350,7 +350,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -382,7 +382,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "type": "integer",
                   "format": "int32"
@@ -434,7 +434,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageResponseFeedbackResponse"
                 }
@@ -465,7 +465,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BookResponse"
                 }
@@ -497,7 +497,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageResponseBorrowedBookResponse"
                 }
@@ -529,7 +529,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageResponseBookResponse"
                 }
@@ -561,7 +561,7 @@
           "200": {
             "description": "OK",
             "content": {
-              "APPLICATION_JSON_VALUE": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageResponseBorrowedBookResponse"
                 }
