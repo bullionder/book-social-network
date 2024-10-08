@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 
-    @Query("""
+    @Query(
+            """
                 SELECT feedback
                 FROM Feedback feedback
                 WHERE feedback.book.id = :bookId

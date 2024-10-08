@@ -1,10 +1,9 @@
 package com.bullionder.book_network.handler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-
 import java.util.Map;
 import java.util.Set;
+import lombok.*;
 
 @Getter
 @Setter

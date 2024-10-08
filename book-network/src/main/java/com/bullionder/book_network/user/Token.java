@@ -1,9 +1,8 @@
 package com.bullionder.book_network.user;
 
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDateTime;
+import lombok.*;
 
 @Getter
 @Setter
@@ -16,6 +15,7 @@ public class Token {
     @Id
     @GeneratedValue
     private Integer id;
+
     private String token;
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;

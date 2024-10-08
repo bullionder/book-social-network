@@ -3,12 +3,12 @@ package com.bullionder.book_network.role;
 import com.bullionder.book_network.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -38,5 +38,3 @@ public class Role {
     @Column(insertable = false)
     private LocalDate lastModifiedDate;
 }
-
-

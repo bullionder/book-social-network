@@ -1,20 +1,19 @@
 package com.bullionder.book_network.book.file;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import static java.io.File.separator;
+import static java.lang.System.currentTimeMillis;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import static java.io.File.separator;
-import static java.lang.System.currentTimeMillis;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -24,16 +23,12 @@ public class FileStorageService {
     @Value("${application.file.upload.photos-output-path}")
     private String fileUploadPath;
 
-    public String saveFile(
-            @NonNull MultipartFile sourceFile,
-            @NonNull Integer userId) {
+    public String saveFile(@NonNull MultipartFile sourceFile, @NonNull Integer userId) {
         final String fileUploadSubPath = "users" + separator + userId;
         return uploadFile(sourceFile, fileUploadSubPath);
     }
 
-    private String uploadFile(
-            @NonNull MultipartFile sourceFile,
-            @NonNull String fileUploadSubPath) {
+    private String uploadFile(@NonNull MultipartFile sourceFile, @NonNull String fileUploadSubPath) {
         final String finalUploadPath = fileUploadPath + separator + fileUploadSubPath;
         File targetFolder = new File(finalUploadPath);
         if (!targetFolder.exists()) {

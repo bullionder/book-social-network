@@ -7,6 +7,4 @@ public record BookRequest(
         String synopsis,
         String bookCover,
         boolean archived,
-        boolean shareable
-) {
-}
+        boolean shareable) {}

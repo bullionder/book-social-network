@@ -1,8 +1,7 @@
 package com.bullionder.book_network.common;
 
-import lombok.*;
-
 import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter

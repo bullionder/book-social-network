@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface BookRepository extends JpaRepository<Book, Integer>, JpaSpecificationExecutor<Book> {
 
-    @Query("""
+    @Query(
+            """
             SELECT book
             FROM Book book
             WHERE book.archived = false

@@ -9,9 +9,7 @@ public class FeedbackMapper {
         return Feedback.builder()
                 .note(request.note())
                 .comment(request.comment())
-                .book(Book.builder()
-                        .id(request.bookId())
-                        .build())
+                .book(Book.builder().id(request.bookId()).build())
                 .build();
     }
 
