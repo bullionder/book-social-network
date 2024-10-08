@@ -12,12 +12,14 @@ import { PageResponseBorrowedBookResponse } from '../../models/page-response-bor
 
 export interface FindAllBorrowedBooks$Params {
   page?: number;
+  size?: number;
 }
 
 export function findAllBorrowedBooks(http: HttpClient, rootUrl: string, params?: FindAllBorrowedBooks$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseBorrowedBookResponse>> {
   const rb = new RequestBuilder(rootUrl, findAllBorrowedBooks.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
+    rb.query('size', params.size, {});
   }
 
   return http.request(
